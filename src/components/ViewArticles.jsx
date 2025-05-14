@@ -56,7 +56,7 @@ export default function ViewArticles() {
             textAlign: 'center',
             boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)'
         }}>
-            <h1 style={{ color: 'white', margin: 0 }}>News App</h1>
+            <h1 style={{ color: 'white', margin: 0 }}>Veritas News</h1>
         </header>
 
         {/* Sticky Category Navigation */}

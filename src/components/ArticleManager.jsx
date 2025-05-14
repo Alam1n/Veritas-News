@@ -84,47 +84,90 @@ const ArticleManager = ({ onEdit }) => {
   if (errorMsg) return <p style={{ color: 'red' }}>{errorMsg}</p>;
   console.log("onEdit prop received:", onEdit);
 
+  // 🎨 Reusable styles
+const thStyle = {
+  padding: '12px',
+  borderBottom: '2px solid #ddd',
+  color: '#333',
+  fontWeight: 'bold'
+};
+
+const tdStyle = {
+  padding: '12px',
+  verticalAlign: 'middle'
+};
+
+const buttonStyle = (bgColor) => ({
+  background: bgColor,
+  color: '#fff',
+  border: 'none',
+  padding: '8px 12px',
+  marginRight: '8px',
+  borderRadius: '6px',
+  cursor: 'pointer',
+  fontWeight: 'bold'
+});
+
+
   return (
-    <div>
-       <div>
+    <div style={{ maxWidth: "1000px", margin: "40px auto", padding: "20px", background: "#fff", borderRadius: "10px", boxShadow: "0 2px 10px rgba(0,0,0,0.1)" }}>
+      
+  <div>
     <Navigation />
     {/* Rest of your page */}
   </div>
-      <h2>📑 Article Dashboard</h2>
-      {errorMsg && <p style={{ color: 'red' }}>{errorMsg}</p>}
-      <table border="1" cellPadding="10">
-        <thead>
-          <tr>
-            <th>Title</th>
-            <th>Category</th>
-            <th>Created At</th>
-            <th>Showcase</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          {articles.map(article => (
-            <tr key={article.id}>
-              <td>{article.title}</td>
-              <td>{article.category}</td>
-              <td>{new Date(article.created_at).toLocaleString()}</td>
-              <td>{article.is_showcase ? '✅' : '❌'}</td>
-              <td>
-                <button onClick={() => handleToggleShowcase(article.id, article.is_showcase)}>
-                  {article.is_showcase ? 'Remove Showcase' : 'Add Showcase'}
-                </button>
-                &nbsp;
-                <button onClick={() => setSelectedArticle(article)}>Edit</button>
-                &nbsp;
-                <button onClick={() => handleDelete(article.id)} style={{ color: 'red' }}>
-                  Delete
-                </button>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
+
+  <h2 style={{ textAlign: 'center', color: '#333' }}>📑 Article Dashboard</h2>
+
+  {errorMsg && <p style={{ color: 'red', textAlign: 'center' }}>{errorMsg}</p>}
+
+  <table style={{
+    width: '100%',
+    borderCollapse: 'collapse',
+    marginTop: '20px',
+    fontSize: '16px'
+  }}>
+    <thead>
+      <tr style={{ background: '#f2f2f2', textAlign: 'left' }}>
+        <th style={thStyle}>Title</th>
+        <th style={thStyle}>Category</th>
+        <th style={thStyle}>Created At</th>
+        <th style={thStyle}>Showcase</th>
+        <th style={thStyle}>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {articles.map(article => (
+        <tr key={article.id} style={{ borderBottom: '1px solid #ddd' }}>
+          <td style={tdStyle}>{article.title}</td>
+          <td style={tdStyle}>{article.category}</td>
+          <td style={tdStyle}>{new Date(article.created_at).toLocaleString()}</td>
+          <td style={tdStyle}>{article.is_showcase ? '✅' : '❌'}</td>
+          <td style={tdStyle}>
+            <button
+              onClick={() => handleToggleShowcase(article.id, article.is_showcase)}
+              style={buttonStyle(article.is_showcase ? '#ffb703' : '#219ebc')}
+            >
+              {article.is_showcase ? 'Remove Showcase' : 'Add Showcase'}
+            </button>
+            <button
+              onClick={() => setSelectedArticle(article)}
+              style={buttonStyle('#3a86ff')}
+            >
+              Edit
+            </button>
+            <button
+              onClick={() => handleDelete(article.id)}
+              style={buttonStyle('#d90429')}
+            >
+              Delete
+            </button>
+          </td>
+        </tr>
+      ))}
+    </tbody>
+  </table>
+</div>
   );
 };
 

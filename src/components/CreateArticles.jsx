@@ -99,18 +99,36 @@ export default function CreateArticle({ articleToEdit }) {
     };
 
     return (
-        <div>
-             <div>
+        <div style={{
+            maxWidth: "600px",
+            margin: "50px auto",
+            background: "#fff",
+            padding: "20px",
+            boxShadow: '0 4px 6px rgba(0,0,0,0.1)',
+            borderRadius: '8px'
+        }}>
+            <div>
                 <Navigation />
                 {/* Rest of your page */}
             </div>
             <h1>{articleToEdit ? 'Edit Article' : 'Create New Article'}</h1>
             <form onSubmit={handleSubmit}>
                 <label>Title:</label><br />
-                <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} required /><br /><br />
-
+                <input
+                    type="text"
+                    value={title}
+                    onChange={(e) => setTitle(e.target.value)}
+                    required
+                    style={{ width: '100%', fontSize: '1.2rem', padding: '10px' }}
+                /><br /><br />
+        
                 <label>Category:</label><br />
-                <select value={category} onChange={(e) => setCategory(e.target.value)} required>
+                <select
+                    value={category}
+                    onChange={(e) => setCategory(e.target.value)}
+                    required
+                    style={{ width: '100%', fontSize: '1.1rem', padding: '10px' }}
+                >
                     <option value="Sport">Sport</option>
                     <option value="Business">Business</option>
                     <option value="Innovation">Innovation</option>
@@ -119,16 +137,28 @@ export default function CreateArticle({ articleToEdit }) {
                     <option value="Travel">Travel</option>
                     <option value="Earth">Earth</option>
                 </select><br /><br />
-
+        
                 <label>Content:</label><br />
-                <textarea rows="4" value={content} onChange={(e) => setContent(e.target.value)} required></textarea><br /><br />
-
+                <textarea
+                    rows="6"
+                    value={content}
+                    onChange={(e) => setContent(e.target.value)}
+                    required
+                    style={{ width: '100%', fontSize: '1.2rem', padding: '15px' }}
+                ></textarea><br /><br />
+        
                 <label>Image:</label><br />
-                <input type="file" onChange={handleImageChange} /><br /><br />
-
+                <input
+                    type="file"
+                    onChange={handleImageChange}
+                    style={{ fontSize: '1rem' }}
+                /><br /><br />
+        
                 {preview && <img src={preview} alt="Preview" style={{ maxWidth: '300px' }} />}<br /><br />
-
-                <button type="submit">{articleToEdit ? 'Update' : 'Submit'}</button>
+        
+                <button type="submit" style={{ padding: '10px 20px', fontSize: '1.1rem' }}>
+                    {articleToEdit ? 'Update' : 'Submit'}
+                </button>
             </form>
             {message && <p>{message}</p>}
         </div>
